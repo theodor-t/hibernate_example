@@ -7,6 +7,7 @@ import com.example.hibernate_example.service.CountryService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CountryServiceImpl implements CountryService {
@@ -40,7 +41,6 @@ public class CountryServiceImpl implements CountryService {
         return existingCountry;
 
     }
-
     @Override
     public void delete(long id) {
         countryRepository.findById(id).orElseThrow(

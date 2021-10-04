@@ -5,13 +5,12 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
+import java.awt.print.Book;
 
 @Data
 @Entity
-@Table(name = "countries")
-public class Country {
-
+@Table(name = "cities")
+public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -19,16 +18,12 @@ public class Country {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "code")
-    private String code;
+    @ManyToOne
+    @JoinColumn(name = "country_id")
+    private Country country;
 
-
-    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<City> cities;
-
-    @JsonManagedReference
-    public List<City> getCities() {
-        return cities;
+    @JsonBackReference
+    public Country getCountry(){
+        return country;
     }
 }
-
